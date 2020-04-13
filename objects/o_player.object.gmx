@@ -27,8 +27,9 @@
             <kind>1</kind>
             <string>///khai bao bien/thuoc tinh
 phy_fixed_rotation=true
-
+hp=5;
 idb=noone
+idd=noone
 
 </string>
           </argument>
@@ -98,7 +99,19 @@ if(collision_rectangle(x-16,y-16,x+16,y+16,o_blc,false,true)){
         instance_destroy();
     }
 }
-
+if(collision_rectangle(x-16,y-16,x+16,y+16,o_dead,false,true)){
+    hp-=1
+    if(idd=collision_rectangle(x-16,y-16,x+16,y+16,o_dead,false,true)){idb=noone}
+    with(collision_rectangle(x-16,y-16,x+16,y+16,o_dead,false,true)){
+        instance_destroy();
+    }
+}
+for(i=1;i&lt;=hp;i++){
+    draw_circle_colour(view_xview[0]+i*10,view_yview[0]+10,5,c_red,c_purple,false);
+}
+if(hp&lt;=0){
+    game_end();
+}
 </string>
           </argument>
         </arguments>
