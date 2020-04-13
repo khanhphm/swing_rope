@@ -8,21 +8,23 @@
   <sprites name="sprites">
     <sprite>sprites\sp_Gnd</sprite>
     <sprite>sprites\sp_player</sprite>
-    <sprite>sprites\sp_deadBlock</sprite>
-    <sprite>sprites\bullet</sprite>
+    <sprite>sprites\sprite4</sprite>
+    <sprite>sprites\sp_dead</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <objects name="objects">
     <object>objects\o_player</object>
-    <object>objects\o_gnd</object>
-    <object>objects\o_deadBlock</object>
-    <object>objects\o_bullet</object>
     <object>objects\o_draw</object>
+    <object>objects\o_blc</object>
+    <object>objects\o_gnd</object>
+    <object>objects\o_create_blc</object>
+    <object>objects\o_create_dead</object>
+    <object>objects\o_dead</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\r_start</room>
     <room>rooms\r_main</room>
+    <room>rooms\r_start</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
