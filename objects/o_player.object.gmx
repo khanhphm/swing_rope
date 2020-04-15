@@ -30,7 +30,14 @@ phy_fixed_rotation=true
 hp=5;
 idb=noone
 idd=noone
-
+score=0
+view_object[0]=o_player
+with(o_col){
+    instance_destroy();
+}
+with(o_dr){
+    instance_destroy();
+}
 </string>
           </argument>
         </arguments>
@@ -82,7 +89,15 @@ kswing2=mouse_check_button(mb_left);
 
 
 if(kswing1){
-    idb=collision_circle(mouse_x,mouse_y,200,o_blc,false,true);
+    effect_create_above(ef_flare,x,y,5,c_aqua)
+    idb=collision_circle(mouse_x,mouse_y,400,o_blc,true,true);
+    idd=collision_circle(mouse_x,mouse_y,400,o_dead,true,true);
+    if(idb!=noone){
+        idb=instance_nearest(mouse_x,mouse_y,o_blc);
+    }
+    if(idd!=noone){
+        idd=instance_nearest(mouse_x,mouse_y,o_dead);
+    }
 }
 
 if(kswing2 and idb!=noone){
@@ -93,25 +108,38 @@ if(kswing2 and idb!=noone){
     
 }
 
+if((kswing2 and idd!=noone)and(idb=noone)){
+    
+    physics_apply_local_impulse(0,0,lengthdir_x(50,point_direction(x,y,idd.x,idd.y)),lengthdir_y(50,point_direction(x,y,idd.x,idd.y)));
+    
+    draw_line_width_colour(x,y,idd.x,idd.y,5,c_red,c_white);
+    
+}
+
 if(collision_rectangle(x-16,y-16,x+16,y+16,o_blc,false,true)){
+    score+=1
     if(idb=collision_rectangle(x-16,y-16,x+16,y+16,o_blc,false,true)){idb=noone}
     with(collision_rectangle(x-16,y-16,x+16,y+16,o_blc,false,true)){
         instance_destroy();
     }
+    effect_create_above(ef_firework,x,y,20,make_color_rgb(245,124,255))
 }
 if(collision_rectangle(x-16,y-16,x+16,y+16,o_dead,false,true)){
     hp-=1
-    if(idd=collision_rectangle(x-16,y-16,x+16,y+16,o_dead,false,true)){idb=noone}
+    if(idd==collision_rectangle(x-16,y-16,x+16,y+16,o_dead,false,true)){idd=noone}
     with(collision_rectangle(x-16,y-16,x+16,y+16,o_dead,false,true)){
         instance_destroy();
     }
+    effect_create_above(ef_firework,x,y,20,make_color_rgb(255,124,124))
 }
 for(i=1;i&lt;=hp;i++){
-    draw_circle_colour(view_xview[0]+i*10,view_yview[0]+10,5,c_red,c_purple,false);
+    draw_circle_colour(view_xview[0]+i*10*3,view_yview[0]+10,5*3,c_red,c_purple,false);
 }
-if(hp&lt;=0){
+if((hp&lt;=0)or collision_rectangle(x-16,y-16,x+16,y+16,o_lava,false,true)){
     game_end();
 }
+
+draw_text_ext_transformed_colour(view_xview[0],view_yview[0]+80,"SCORE: "+string(score),5,100,3,3,0,c_white,c_lime,c_green,c_aqua,255)
 </string>
           </argument>
         </arguments>

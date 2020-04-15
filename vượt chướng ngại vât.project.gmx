@@ -10,6 +10,7 @@
     <sprite>sprites\sp_player</sprite>
     <sprite>sprites\sprite4</sprite>
     <sprite>sprites\sp_dead</sprite>
+    <sprite>sprites\lava</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -21,6 +22,9 @@
     <object>objects\o_create_blc</object>
     <object>objects\o_create_dead</object>
     <object>objects\o_dead</object>
+    <object>objects\o_lava</object>
+    <object>objects\o_col</object>
+    <object>objects\o_dr</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\r_main</room>

@@ -51,13 +51,17 @@ yy=0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(instance_number(o_blc)&lt;150){   
+            <string>randomize();
+if(instance_number(o_blc)&lt;50000){   
         xx=random(room_width);
         yy=random(room_height);     
     idb=instance_create(xx,yy,o_blc);
-    idb.image_angle=random(360);
-    
+    with(idb){
+        phy_rotation=random(360);
+    }
+    //view_object=idb
 }
+
 
 
 </string>
